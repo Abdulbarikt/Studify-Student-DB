@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_app/controller/db.dart';
+import 'package:firebase_app/controller/upload_image.dart';
 import 'package:firebase_app/utils/colorconstans.dart';
 import 'package:firebase_app/view/widgets/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,7 @@ class AddUser extends StatelessWidget {
   final phoneController = TextEditingController();
   final courseController = TextEditingController();
   File? image;
+  String imageUrl = '';
 
   final _key = GlobalKey<FormState>();
 
@@ -62,35 +63,30 @@ class AddUser extends StatelessWidget {
                           padding: const EdgeInsets.all(17.0),
                           child: Column(
                             children: [
-                              Consumer<StudentData>(
-                                builder: (BuildContext context, studentData,
-                                    Widget? child) {
-                                  image = studentData.imageFile;
-                                  return InkWell(
-                                    onTap: () {
-                                      Provider.of<StudentData>(context,
-                                              listen: false)
-                                          .imagePicker();
-                                    },
-                                    child: image != null
-                                        ? CircleAvatar(
-                                            maxRadius: 60,
-                                            backgroundImage:
-                                                FileImage(File(image!.path)),
-                                          )
-                                        : DottedBorder(
-                                            dashPattern: const [15, 5],
-                                            borderType: BorderType.Circle,
-                                            child: const CircleAvatar(
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              maxRadius: 60,
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/camera.png"),
-                                            ),
-                                          ),
-                                  );
+                              InkWell(
+                                onTap: () async {
+                                  imageUrl = await Provider.of<ImageProvide>(
+                                          context,
+                                          listen: false)
+                                      .uploadImage();
                                 },
+                                child: Consumer<ImageProvide>(
+                                  builder: (BuildContext context,
+                                      ImageProvide value, Widget? child) {
+                                    return (imageUrl == '')
+                                        ? const CircleAvatar(
+                                            backgroundColor: Colors.transparent,
+                                            radius: 60,
+                                            backgroundImage: AssetImage(
+                                                "assets/images/camera.png"),
+                                          )
+                                        : CircleAvatar(
+                                            radius: 60,
+                                            backgroundImage:
+                                                NetworkImage(imageUrl),
+                                          );
+                                  },
+                                ),
                               ),
                               const Sizedbox(height: 15.0),
                               CustomTextFormField(
@@ -181,9 +177,7 @@ class AddUser extends StatelessWidget {
                               const Sizedbox(height: 15.0),
                               Consumer<StudentData>(
                                 builder: (BuildContext context, studentData,
-                              
                                     Widget? child) {
-                                  String imageUrl = studentData.imageUrl;
                                   return SizedBox(
                                     width: MediaQuery.of(context).size.width,
                                     child: ElevatedButton(
@@ -206,9 +200,6 @@ class AddUser extends StatelessWidget {
                                           final email = emailController.text;
                                           final phone = phoneController.text;
                                           final course = courseController.text;
-                                          Provider.of<StudentData>(context,
-                                                  listen: false)
-                                              .addToStorage(image!);
 
                                           Provider.of<StudentData>(context,
                                                   listen: false)

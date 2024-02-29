@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_app/view/widgets/sizedbox.dart';
 import 'package:provider/provider.dart';
+import '../../../controller/upload_image.dart';
 import '../../widgets/custom_textfield.dart';
 
 // ignore: must_be_immutable
@@ -33,7 +34,9 @@ class Update extends StatelessWidget {
     emailController.text = args['Email'];
     phoneController.text = args['Phone'];
     courseController.text = args['course'];
+    final oldImage = args['Image'];
     final studentId = args['id'];
+    String imageUrl = '';
 
     return Scaffold(
       appBar: AppBar(
@@ -76,6 +79,31 @@ class Update extends StatelessWidget {
                         padding: const EdgeInsets.all(17.0),
                         child: Column(
                           children: [
+                            InkWell(
+                              onTap: () async {
+                                imageUrl = await Provider.of<ImageProvide>(
+                                        context,
+                                        listen: false)
+                                    .uploadImage();
+                              },
+                              child: Consumer<ImageProvide>(
+                                builder: (BuildContext context,
+                                    ImageProvide value, Widget? child) {
+                                  return (imageUrl == '')
+                                      ? CircleAvatar(
+                                          backgroundColor: Colors.transparent,
+                                          radius: 60,
+                                          backgroundImage:
+                                              NetworkImage(oldImage),
+                                        )
+                                      : CircleAvatar(
+                                          radius: 60,
+                                          backgroundImage:
+                                              NetworkImage(imageUrl),
+                                        );
+                                },
+                              ),
+                            ),
                             const Sizedbox(height: 15.0),
                             CustomTextFormField(
                               controller: nameController,
@@ -136,16 +164,27 @@ class Update extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   if (_key.currentState!.validate()) {
-                                    Provider.of<StudentData>(context,
-                                            listen: false)
-                                        .upDatedata(
-                                      studentId,
-                                      nameController,
-                                      emailController,
-                                      ageController,
-                                      phoneController,
-                                      courseController,
-                                    );
+                                    imageUrl == ''
+                                        ? Provider.of<StudentData>(context,
+                                                listen: false)
+                                            .upDatedata(
+                                                studentId,
+                                                nameController,
+                                                emailController,
+                                                ageController,
+                                                phoneController,
+                                                courseController,
+                                                oldImage)
+                                        : Provider.of<StudentData>(context,
+                                                listen: false)
+                                            .upDatedata(
+                                                studentId,
+                                                nameController,
+                                                emailController,
+                                                ageController,
+                                                phoneController,
+                                                courseController,
+                                                imageUrl);
                                   }
                                   Navigator.pop(context);
                                 },

@@ -31,14 +31,14 @@ class HomePage extends StatelessWidget {
               height: 20,
             ),
             const Text(
-              'TodoMate',
+              'Studify',
               style: TextStyle(
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const Text(
-              'Your Ultimate Task Manager',
+              'Study Hub Simplified',
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.grey,

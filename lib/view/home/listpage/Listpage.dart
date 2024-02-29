@@ -2,6 +2,7 @@ import 'package:firebase_app/controller/db.dart';
 import 'package:firebase_app/utils/colorconstans.dart';
 import 'package:firebase_app/view/home/homepage/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -115,62 +116,87 @@ class ListPage extends StatelessWidget {
                             left: 10.0,
                             top: 5.0,
                           ),
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            color: AppColors.kPrimary,
-                            child: ListTile(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/update',
-                                  arguments: {
-                                    'Name': studentData['Name'],
-                                    'Age': studentData['Age'],
-                                    'Email': studentData['Email'],
-                                    'Phone': studentData['Phone'],
-                                    'course': studentData['course'],
-                                    'id': studentData.id,
+                          child: SizedBox(
+                            height: 120, // Adjust the height as needed
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                  right: 10.0, left: 10.0, top: 5.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: AppColors.kPrimary,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 7,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: ListTile(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/update',
+                                      arguments: {
+                                        'Name': studentData['Name'],
+                                        'Age': studentData['Age'],
+                                        'Email': studentData['Email'],
+                                        'Phone': studentData['Phone'],
+                                        'course': studentData['course'],
+                                        'Image': studentData['Image'],
+                                        'id': studentData.id,
+                                      },
+                                    );
                                   },
-                                );
-                              },
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(studentData['Image']),
-                              ),
-                              title: Text(
-                                studentData['Name'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors
-                                      .white, // Set the text color to white
-                                ),
-                              ),
-                              subtitle: Text(
-                                studentData['Email'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors
-                                      .white, // Set the text color to white
-                                ),
-                              ),
-                              trailing: Container(
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color.fromARGB(255, 86, 81, 81),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Provider.of<StudentData>(context,
-                                            listen: false)
-                                        .delete(studentData.id);
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.white,
+                                  leading: Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image:
+                                            NetworkImage(studentData['Image']),
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                    studentData['Name'],
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    studentData['course'],
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  trailing: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color.fromARGB(255, 86, 81, 81),
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Provider.of<StudentData>(context,
+                                                listen: false)
+                                            .delete(studentData.id);
+                                      },
+                                      icon: const Icon(
+                                        CupertinoIcons.delete,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

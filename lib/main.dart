@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => StudentData()),
-        // ChangeNotifierProvider(create: (context) => ImageProvide()),
+        ChangeNotifierProvider(create: (context) => ImageProvide()),
       ],
       child: MaterialApp(
         theme: ThemeData(fontFamily: 'Montserrat'),
-        title: 'TodoMate',
+        title: 'Studify',
         debugShowCheckedModeBanner: false,
         home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),

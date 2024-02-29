@@ -39,7 +39,6 @@ dependencies:
   firebase_core:
   cloud_firestore: ^4.13.3
   provider: ^6.1.1
-  flutter_local_notifications:
   get: ^4.6.6
   geolocator: ^10.1.0
   geocoding: ^2.1.1
@@ -49,13 +48,19 @@ dependencies:
   google_sign_in: ^6.2.1
   fluttertoast: ^8.2.4
   image_picker: ^1.0.7
-  dotted_border: ^2.1.0
   firebase_storage: ^11.6.7
-  uuid: ^4.3.3
+
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

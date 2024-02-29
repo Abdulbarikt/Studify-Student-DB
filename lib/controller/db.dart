@@ -2,10 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:uuid/uuid.dart';
 
 class StudentData extends ChangeNotifier {
   getData() {
@@ -39,8 +36,6 @@ class StudentData extends ChangeNotifier {
     );
   }
 
-
-
   void upDatedata(
     final studentId,
     TextEditingController name,
@@ -48,6 +43,7 @@ class StudentData extends ChangeNotifier {
     TextEditingController age,
     TextEditingController phone,
     TextEditingController course,
+    final image,
   ) {
     final CollectionReference userdata =
         FirebaseFirestore.instance.collection('notes');
@@ -57,6 +53,7 @@ class StudentData extends ChangeNotifier {
       'Email': email.text,
       'Phone': phone.text,
       'course': course.text,
+      'Image': image,
     };
     userdata.doc(studentId).update(data);
   }
@@ -64,28 +61,5 @@ class StudentData extends ChangeNotifier {
   final students = FirebaseFirestore.instance.collection('notes');
   void delete(docid) {
     students.doc(docid).delete();
-  }
-  String imageUrl = 'aa';
-  void addToStorage(File image) async {
-    String fileName = const Uuid().v1();
-    final storageRef = FirebaseStorage.instance.ref();
-
-    TaskSnapshot uploadTask =
-        await storageRef.child('profile_images').child(fileName).putFile(image);
-    imageUrl = await uploadTask.ref.getDownloadURL();
-    notifyListeners();
-  }
-  File? imageFile;
-
-  void imagePicker() async {
-    final imagePicker = ImagePicker();
-    try {
-      final pickedFile =
-          await imagePicker.pickImage(source: ImageSource.gallery);
-      imageFile = File(pickedFile!.path);
-      notifyListeners();
-    } catch (e) {
-      print(e);
-    }
   }
 }

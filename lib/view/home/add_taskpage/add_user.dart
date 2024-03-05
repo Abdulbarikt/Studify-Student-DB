@@ -93,6 +93,7 @@ class AddUser extends StatelessWidget {
                               ),
                               const Sizedbox(height: 15.0),
                               CustomTextFormField(
+                                keyboardType: TextInputType.name,
                                 controller: nameController,
                                 labelText: 'First Name',
                                 hintText: 'Enter First Name',
@@ -106,6 +107,7 @@ class AddUser extends StatelessWidget {
                               ),
                               const Sizedbox(height: 15.0),
                               CustomTextFormField(
+                                keyboardType: TextInputType.number,
                                 controller: ageController,
                                 labelText: 'Age',
                                 hintText: 'Enter Age',
@@ -126,6 +128,7 @@ class AddUser extends StatelessWidget {
                               ),
                               const Sizedbox(height: 15.0),
                               CustomTextFormField(
+                                keyboardType: TextInputType.emailAddress,
                                 controller: emailController,
                                 labelText: 'Email',
                                 hintText: 'Enter Email',
@@ -146,6 +149,7 @@ class AddUser extends StatelessWidget {
                               ),
                               const Sizedbox(height: 15.0),
                               CustomTextFormField(
+                                keyboardType: TextInputType.number,
                                 controller: phoneController,
                                 labelText: 'Phone',
                                 hintText: 'Enter Phone',
@@ -166,6 +170,7 @@ class AddUser extends StatelessWidget {
                               ),
                               const Sizedbox(height: 15.0),
                               CustomTextFormField(
+                                keyboardType: TextInputType.name,
                                 controller: courseController,
                                 labelText: 'Course',
                                 hintText: 'Enter Course',

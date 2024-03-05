@@ -1,6 +1,6 @@
 import 'package:firebase_app/utils/colorconstans.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
   final int currentIndex;
@@ -17,19 +17,20 @@ class BottomNavigationBarWidget extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
+      backgroundColor: AppColors.kPrimary, // Set the background color to red
       items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'List',
-            backgroundColor: AppColors.kPrimary),
+          icon: Icon(Ionicons.list),
+          label: 'List',
+        ),
         BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.add),
-            label: 'Add User',
-            backgroundColor: AppColors.kPrimary),
+          icon: Icon(Ionicons.add_circle),
+          label: 'Add User',
+        ),
         BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.person),
-            label: 'Profile',
-            backgroundColor: AppColors.kPrimary),
+          icon: Icon(Ionicons.person_circle),
+          label: 'Profile',
+        ),
       ],
     );
   }

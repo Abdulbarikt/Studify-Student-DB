@@ -108,6 +108,7 @@ class Update extends StatelessWidget {
                             ),
                             const Sizedbox(height: 15.0),
                             CustomTextFormField(
+                              keyboardType: TextInputType.name,
                               controller: nameController,
                               labelText: 'First Name',
                               hintText: 'First Name',
@@ -116,6 +117,7 @@ class Update extends StatelessWidget {
                             ),
                             const Sizedbox(height: 15.0),
                             CustomTextFormField(
+                              keyboardType: TextInputType.number,
                               controller: ageController,
                               labelText: 'Age',
                               hintText: 'Age',
@@ -124,6 +126,7 @@ class Update extends StatelessWidget {
                             ),
                             const Sizedbox(height: 15.0),
                             CustomTextFormField(
+                              keyboardType: TextInputType.emailAddress,
                               controller: emailController,
                               labelText: 'Email',
                               hintText: 'Email',
@@ -132,6 +135,7 @@ class Update extends StatelessWidget {
                             ),
                             const Sizedbox(height: 15.0),
                             CustomTextFormField(
+                              keyboardType: TextInputType.number,
                               controller: phoneController,
                               labelText: 'Phone',
                               hintText: 'Phone',
@@ -140,6 +144,7 @@ class Update extends StatelessWidget {
                             ),
                             const Sizedbox(height: 15.0),
                             CustomTextFormField(
+                              keyboardType: TextInputType.name,
                               controller: courseController,
                               labelText: 'Course',
                               hintText: 'Course',

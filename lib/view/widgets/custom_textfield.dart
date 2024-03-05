@@ -8,6 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   final RegExp? regex;
   final int? maxlength;
   final Icon icons;
+  final  keyboardType;
 
   const CustomTextFormField({
     super.key,
@@ -17,12 +18,13 @@ class CustomTextFormField extends StatelessWidget {
     required this.icons,
     this.validator,
     this.regex,
-    this.maxlength,
+    this.maxlength, required this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       decoration: InputDecoration(

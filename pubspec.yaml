@@ -53,6 +53,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   iconly: ^1.0.1
   nested: ^1.0.0
+  ionicons: ^0.2.2
 
 
   

@@ -39,16 +39,21 @@ dependencies:
   firebase_core:
   cloud_firestore: ^4.13.3
   provider: ^6.1.1
-  get: ^4.6.6
   geolocator: ^10.1.0
   geocoding: ^2.1.1
   lottie: ^3.1.0
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.1.0
   google_sign_in: ^6.2.1
-  fluttertoast: ^8.2.4
   image_picker: ^1.0.7
   firebase_storage: ^11.6.7
+  firebase_messaging: ^14.7.17
+  flutter_local_notifications: ^16.3.2
+  navbar_router: ^0.7.3
+  persistent_bottom_nav_bar: ^5.0.2
+  iconly: ^1.0.1
+  nested: ^1.0.0
+
 
   
 

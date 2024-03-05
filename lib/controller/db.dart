@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class StudentData extends ChangeNotifier {
+  String email = '';
+  String name = '';
   getData() {
     User? userId = FirebaseAuth.instance.currentUser;
     final data = FirebaseFirestore.instance
@@ -21,6 +23,7 @@ class StudentData extends ChangeNotifier {
     String phone,
     String course,
     String image,
+    String location,
   ) async {
     User? currentUser = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance.collection("notes").doc().set(
@@ -31,6 +34,7 @@ class StudentData extends ChangeNotifier {
         "Phone": phone,
         "course": course,
         "Image": image,
+        'location': location,
         "userId": currentUser?.uid,
       },
     );
@@ -44,6 +48,7 @@ class StudentData extends ChangeNotifier {
     TextEditingController phone,
     TextEditingController course,
     final image,
+    String location,
   ) {
     final CollectionReference userdata =
         FirebaseFirestore.instance.collection('notes');
@@ -54,6 +59,7 @@ class StudentData extends ChangeNotifier {
       'Phone': phone.text,
       'course': course.text,
       'Image': image,
+      'location': location,
     };
     userdata.doc(studentId).update(data);
   }

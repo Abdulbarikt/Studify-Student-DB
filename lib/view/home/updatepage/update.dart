@@ -21,6 +21,7 @@ class Update extends StatelessWidget {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final courseController = TextEditingController();
+  late String location;
   final _key = GlobalKey<FormState>();
 
   User? currentUser = FirebaseAuth.instance.currentUser;
@@ -35,6 +36,7 @@ class Update extends StatelessWidget {
     phoneController.text = args['Phone'];
     courseController.text = args['course'];
     final oldImage = args['Image'];
+    location = args['location'].toString();
     final studentId = args['id'];
     String imageUrl = '';
 
@@ -145,6 +147,7 @@ class Update extends StatelessWidget {
                               icons: const Icon(Icons.person),
                             ),
                             const Sizedbox(height: 15.0),
+                            Text(location),
                             const Sizedbox(height: 15.0),
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
@@ -174,7 +177,8 @@ class Update extends StatelessWidget {
                                                 ageController,
                                                 phoneController,
                                                 courseController,
-                                                oldImage)
+                                                oldImage,
+                                                location)
                                         : Provider.of<StudentData>(context,
                                                 listen: false)
                                             .upDatedata(
@@ -184,7 +188,8 @@ class Update extends StatelessWidget {
                                                 ageController,
                                                 phoneController,
                                                 courseController,
-                                                imageUrl);
+                                                imageUrl,
+                                                location);
                                   }
                                   Navigator.pop(context);
                                 },

@@ -30,8 +30,8 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
         prefixIcon: icons,
-        contentPadding: const EdgeInsets.symmetric(
-            vertical: 16.0, horizontal: 16.0), 
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       ),
       validator: validator,
     );

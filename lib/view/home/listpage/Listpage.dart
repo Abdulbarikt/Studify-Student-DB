@@ -1,14 +1,10 @@
 import 'package:firebase_app/controller/db.dart';
 import 'package:firebase_app/utils/colorconstans.dart';
-import 'package:firebase_app/view/home/homepage/HomePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../add_taskpage/add_user.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -17,56 +13,6 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.kPrimary, // Set the background color
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddUser()),
-              );
-            },
-            icon: const Icon(Icons.add, color: Colors.white),
-          ),
-        ),
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut().then((value) =>
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage())));
-              },
-              icon: const Icon(
-                Icons.logout_rounded,
-                size: 30, // Adjust the size as needed
-                color: Colors.white, // Set the color to white
-              ),
-            ),
-          ],
-          backgroundColor: AppColors.kPrimary,
-          title: const Text(
-            "Student Data",
-            style: TextStyle(color: Colors.white, fontSize: 24),
-          ),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-        ),
         body: Container(
           color: Colors.grey[200],
           child: Padding(
@@ -74,6 +20,7 @@ class ListPage extends StatelessWidget {
             child: Consumer<StudentData>(
               builder: (BuildContext context, studentData, child) {
                 final data = studentData.getData();
+                
                 return StreamBuilder(
                   stream: data,
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -147,6 +94,7 @@ class ListPage extends StatelessWidget {
                                         'Phone': studentData['Phone'],
                                         'course': studentData['course'],
                                         'Image': studentData['Image'],
+                                        'location': studentData['location'],
                                         'id': studentData.id,
                                       },
                                     );

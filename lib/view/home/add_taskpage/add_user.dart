@@ -6,6 +6,7 @@ import 'package:firebase_app/utils/colorconstans.dart';
 import 'package:firebase_app/view/widgets/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../controller/location.dart';
 import '../../widgets/custom_textfield.dart';
 
 class AddUser extends StatelessWidget {
@@ -23,6 +24,8 @@ class AddUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final location = Provider.of<LocationProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -53,7 +56,7 @@ class AddUser extends StatelessWidget {
                         'Add Student',
                         style: TextStyle(fontSize: 35),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 20),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
@@ -174,7 +177,35 @@ class AddUser extends StatelessWidget {
                                 },
                                 icons: const Icon(Icons.school),
                               ),
-                              const Sizedbox(height: 15.0),
+                              Sizedbox(height: 15.0),
+                              Text(location.currentAddress),
+                              Sizedbox(height: 15.0),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor:
+                                      AppColors.kPrimary, // Text color
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 24.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  elevation: 3.0, // Elevation
+                                ),
+                                onPressed: () async {
+                                  await Provider.of<LocationProvider>(context,
+                                          listen: false)
+                                      .getLocation();
+                                },
+                                child: Text(
+                                  "Add location",
+                                  style:
+                                      TextStyle(fontSize: 16.0), // Text style
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Consumer<StudentData>(
                                 builder: (BuildContext context, studentData,
                                     Widget? child) {
@@ -203,14 +234,20 @@ class AddUser extends StatelessWidget {
 
                                           Provider.of<StudentData>(context,
                                                   listen: false)
-                                              .addData(name, age, email, phone,
-                                                  course, imageUrl);
+                                              .addData(
+                                                  name,
+                                                  age,
+                                                  email,
+                                                  phone,
+                                                  course,
+                                                  imageUrl,
+                                                  location.currentAddress);
                                           nameController.clear();
                                           ageController.clear();
                                           emailController.clear();
                                           phoneController.clear();
                                           courseController.clear();
-
+                                          location.clearCurrentAddress();
                                           Navigator.pop(context);
                                         }
                                         Provider.of<StudentData>(context,

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_app/utils/colorconstans.dart';
-import 'package:firebase_app/view/home/listpage/Listpage.dart';
 import 'package:firebase_app/view/home/login/Login.dart';
-import 'package:firebase_app/view/home/main_page/main_page.dart';
 import 'package:firebase_app/view/widgets/authbutton.dart';
 import 'package:firebase_app/view/widgets/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
